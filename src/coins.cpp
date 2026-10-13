@@ -4,7 +4,9 @@
 using namespace std;
 
 Coins:: Coins(int q, int d, int n, int p)
-	:quarters(q), dimes(d), nickels(n), pennies(p);
+	:quarters(q), dimes(d), nickels(n), pennies(p){
+
+	}
 
 
 void Coins:: deposit_coins(Coins& coins){
@@ -47,6 +49,37 @@ Coins Coins::  extract_exact_change(const Coins& coins){
 
 }
 
+void Coins:: print(std:: ostream& out) const{
+
+	out << quarters << " quarters, " << dimes << " dimes, " << nickels << " nickels, " << pennies << " pennies";
+
+}
+
+std::ostream& operator<<(ostream& out, const Coins& coins) {
+
+	coins.print(out);
+    return out;
+
+}
+
+Coins coins_required_for_cents(int amount_in_cents){
+
+	
+	int q = amount_in_cents / CENTS_PER_QUARTER;
+	amount_in_cents %= CENTS_PER_QUARTER;
+
+	int d = amount_in_cents / CENTS_PER_DIME;
+	amount_in_cents %= CENTS_PER_DIME;
+
+	int n = amount_in_cents / CENTS_PER_NICKEL;
+	amount_in_cents %=  CENTS_PER_NICKEL;
+
+	int p = amount_in_cents/1;
+
+	return Coins(q, d, n, p);
+
+
+}
 
 
 
