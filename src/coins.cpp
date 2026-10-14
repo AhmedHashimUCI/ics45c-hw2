@@ -23,7 +23,7 @@ void Coins:: deposit_coins(Coins& coins){
 
 }
 
-bool Coins:: has_exact_change_for_coins(const Coins& coin){
+bool Coins:: has_exact_change_for_coins(const Coins& coins) const{
 
 	
 	if (quarters >= coins.quarters && dimes >= coins.dimes 
@@ -31,8 +31,13 @@ bool Coins:: has_exact_change_for_coins(const Coins& coin){
 		
 			return true;
 	
-		} else 
-		return false;
+		} else {
+	
+	return false;
+
+
+}
+	return false;
 }
 
 
