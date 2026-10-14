@@ -85,7 +85,9 @@ Coins coins_required_for_cents(int amount_in_cents){
 
 
 }
-
+void print_cents(int cents, std::ostream& out){}
+int Coins::total_value_in_cents() const{
+return 0;}
 
 
 

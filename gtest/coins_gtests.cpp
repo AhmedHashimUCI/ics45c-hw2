@@ -57,3 +57,38 @@ TEST(Coins, PrintCents) {
   EXPECT_STREQ(print_cents_str(100).c_str(), "$1.00");
   EXPECT_STREQ(print_cents_str(205).c_str(), "$2.05");
 }
+
+TEST(Coins, Build){
+	Coins coins(2, 23, 4, 1);
+	EXPECT_EQ(coins, Coins(2, 23, 4, 1));
+
+}
+
+TEST(Coins, Print) {
+    Coins coins(1, 2, 3, 4);
+    ostringstream out;
+
+    coins.print(out);
+
+    EXPECT_EQ(out.str(),
+              "1 quarters, 2 dimes, 3 nickels, 4 pennies");
+}
+
+TEST(Coins, CoinstoCentsRequired) {
+
+EXPECT_EQ(coins_required_for_cents(117),
+              Coins(4, 1, 1, 2));
+}
+
+TEST(Coins, ExactExtraction){
+
+Coins coin1(5, 3, 2, 10);
+Coins coin2(2, 1, 1, 4);
+
+Coins coin3 = coin1.extract_exact_change(coin2);
+
+EXPECT_EQ(coin3, coin2);
+EXPECT_EQ(coin1, Coins(3, 2, 1,6));
+
+
+}
