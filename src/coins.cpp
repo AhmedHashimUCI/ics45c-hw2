@@ -130,7 +130,7 @@ int p;
 	out << "How much Nickels?";
 	in >> n;
 
-	out >> "Finally, Pennies?":
+	out << "Finally, Pennies?";
 	in >> p;
 
 
@@ -141,17 +141,20 @@ int p;
 
 void coins_menu(std::istream& in, std::ostream& out){
 
-	int option;
+	int option = 0;
+	Coins myCoins(0,0,0,0);
 
-	out << "\n1. Deposit" << endl;;
+	while(option != 4){
+
+	out << "\n1. Deposit" << endl;
     out << "2. Extract" << endl;
-    out << "3. Print balance" endl;
+	out << "3. Print balance" << endl;
     out << "4. Exit" << endl;
     out << "Please choose an option: ";
 
 	in >> option;
 
-	Coins myCoins(0, 0, 0, 0);
+	
 
 	if (option == 1){
 
@@ -162,30 +165,28 @@ void coins_menu(std::istream& in, std::ostream& out){
 
 	Coins req = ask_for_coins(in, out);
 
-	if (myCoins.has_exact_change_for_coins(requested)){
+	if (myCoins.has_exact_change_for_coins(req)){
 
 		myCoins.extract_exact_change(req);
 
 		}else {
 
-		out << "None Sufficent Balance, try again later!" endl;
+		out << "None Sufficent Balance, try again later!" << endl;
 
 		}
 
 	}else if (option == 3){
 
-		cents = myCoins.total_value_in_cents();
-		mycoins.print_cents(cents, out);
+		int cents = myCoins.total_value_in_cents();
+		print_cents(cents, out);
 		out << endl;
 
 	}else if (option == 4){
 
-		exit(EXIT_SUCCESS);
+		option = 4;
+
+		}
 
 	}
-
-	
-	coins_menu(in, out);
-
 }
 
