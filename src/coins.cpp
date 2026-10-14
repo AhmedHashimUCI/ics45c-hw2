@@ -90,7 +90,16 @@ void print_cents(int cents, std::ostream& out){
 	int dollar = cents/100;
 	int centsremain = cents % 100;
 
-	out << '$' << dollar << '.' << centsremain;
+	out << '$' << dollar << '.';
+
+	if (centsremain < 10){
+		out << '0'<< centsremain;
+
+	}else{
+	
+		out << centsremain;
+
+	}
 
 
 }
