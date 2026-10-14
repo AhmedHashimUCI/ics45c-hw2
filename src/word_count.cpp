@@ -6,7 +6,7 @@ using namespace std;
 
 void to_lowercase(string &str){
 
-	for (char c : str){
+	for (char& c : str){
 
 	c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
 
