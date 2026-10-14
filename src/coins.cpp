@@ -85,9 +85,24 @@ Coins coins_required_for_cents(int amount_in_cents){
 
 
 }
-void print_cents(int cents, std::ostream& out){}
+void print_cents(int cents, std::ostream& out){
+
+	int dollar = cents/100;
+	int centsremain = cents % 100;
+
+	out << '$' << dollar << '.' << centsremain;
+
+
+}
 int Coins::total_value_in_cents() const{
-return 0;}
+
+	int q = quarters * CENTS_PER_QUARTER;
+	int d = dimes * CENTS_PER_DIME;
+	int n = nickels * CENTS_PER_NICKEL;
+	int p = pennies * 1;
+
+	return q + d + n + p;
+}
 
 
 
