@@ -48,7 +48,7 @@ TEST(WordCountTests, WordsAreCountedCaseInsensitively) {
 TEST(WordCountTests, LowerCaseLana){
 	string test = "LAna DeL REy";
 	to_lowercase(test);
-	EXPECT_EQ(test, "lana dek rey");
+	EXPECT_EQ(test, "lana del rey");
 
 
 
@@ -104,7 +104,7 @@ TEST(WordCountTests, CountWords) {
   EXPECT_EQ(counts.at("aa"), 2);
   EXPECT_EQ(counts.at("bc"), 1);
   EXPECT_EQ(counts.at("foo"), 1);
-  EXPECT_EQ(counts.at("bar"), 2);
+  EXPECT_EQ(counts.at("bar"), 1);
   EXPECT_FALSE(counts.contains("baz"));
 }
 
@@ -129,4 +129,16 @@ TEST(WordCountTests, EmptyOutput) {
     output_word_counts(counts, output);
 
     EXPECT_EQ(output.str(), "");
+}
+
+TEST(WordCountTests, ExactOutput) {
+    map<string, int> counts = {
+        {"apple", 3},
+        {"banana", 2}
+    };
+
+    stringstream output;
+    output_word_counts(counts, output);
+
+    EXPECT_EQ(output.str(), "apple 3\nbanana 2");
 }
