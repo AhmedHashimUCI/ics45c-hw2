@@ -45,7 +45,7 @@ TEST(WordCountTests, WordsAreCountedCaseInsensitively) {
 }
 
 // ADD YOUR TESTS HERE
-TEST(WordCount, LowerCaseLana){
+TEST(WordCountTests, LowerCaseLana){
 	string test = "LAna DeL REy";
 	to_lowercase(test);
 	EXPECT_STREQ("lana del rey", test.c_str());
@@ -55,7 +55,7 @@ TEST(WordCount, LowerCaseLana){
 }
 
 
-TEST(wordCount, LowerCaseSentence){
+TEST(WordCountTests, LowerCaseSentence){
 	string sen = "HELLO, wHO aRE yOU?";
 	to_lowercase(sen);
 	EXPECT_STREQ("hello, who are you?", sen.c_str());
@@ -63,7 +63,7 @@ TEST(wordCount, LowerCaseSentence){
 }
 
 
-TEST(WordCount, LoadStopWords) {
+TEST(WordCountTests, LoadStopWords) {
   stringstream test("hello world");
 
   const auto stop_words = load_stopwords(test);
@@ -74,7 +74,7 @@ TEST(WordCount, LoadStopWords) {
 }
 
 
-TEST(WordCount, LoadStopWatchMultiple){
+TEST(WordCountTests, LoadStopWatchMultiple){
 	stringstream test("lana del rey");
 	stringstream test2("arctic");
 
@@ -87,7 +87,7 @@ TEST(WordCount, LoadStopWatchMultiple){
 
 }
 
-TEST(WordCount, LoadEmpty){
+TEST(WordCountTests, LoadEmpty){
 
 	stringstream empty("");
 
@@ -97,7 +97,7 @@ TEST(WordCount, LoadEmpty){
 }
 
 
-TEST(WordCount, CountWords) {
+TEST(WordCountTests, CountWords) {
   stringstream test("aa aa bc foo bar");
   const auto counts = count_words(test, {});
 
@@ -108,7 +108,7 @@ TEST(WordCount, CountWords) {
   EXPECT_FALSE(counts.contains("baz"));
 }
 
-TEST (WordCount, CountWordsMulti) {
+TEST (WordCountTests, CountWordsMulti) {
 
 stringstream test("air lana bob lana lana time");
 
@@ -121,4 +121,5 @@ EXPECT_EQ(counts.at("bob"), 1);
 EXPECT_FALSE(counts.contains("del"));
 
 }
+
 
