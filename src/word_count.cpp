@@ -55,12 +55,9 @@ void output_word_counts(const map<string, int>& word_counts, ostream& output){
 	int lastline = 0;
 
 	for (auto pairs: word_counts){
+		if (pairs.second > 0){
 
-		if (lastline != 0){
-			output << '\n';
+		output << pairs.first << " " << pairs.second<< endl;
 		}
-
-		output << pairs.first << " " << pairs.second;
-		lastline++;
 	}
 }

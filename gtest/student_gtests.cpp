@@ -140,5 +140,38 @@ TEST(WordCountTests, ExactOutput) {
     stringstream output;
     output_word_counts(counts, output);
 
-    EXPECT_EQ(output.str(), "apple 3\nbanana 2");
+    EXPECT_EQ(output.str(), "apple 3\nbanana 2\n");
+}
+
+TEST(WordCountTests, Duplicate) {
+    stringstream input("THE the ThE AND and AnD");
+
+    const auto stops = load_stopwords(input);
+
+    EXPECT_EQ(stops.size(), 2);
+    EXPECT_TRUE(stops.contains("the"));
+    EXPECT_TRUE(stops.contains("and"));
+}
+
+TEST(WordCountTests, Fullrun) {
+    stringstream stopfile("THE And");
+    stringstream document("The APPLE apple AND Banana banana THE");
+
+    const auto stops = load_stopwords(stopfile);
+    const auto counts = count_words(document, stops);
+
+    stringstream output;
+    output_word_counts(counts, output);
+
+    EXPECT_EQ(output.str(), "apple 2\nbanana 2\n");
+}
+
+TEST(WordCountTests, SingleWordCount) {
+    stringstream document("45c");
+    set<string> stops;
+
+    const auto counts = count_words(document, stops);
+
+    EXPECT_EQ(counts.size(), 1);
+    EXPECT_EQ(counts.at("45c"), 1);
 }
