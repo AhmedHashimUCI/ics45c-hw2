@@ -48,7 +48,7 @@ TEST(WordCountTests, WordsAreCountedCaseInsensitively) {
 TEST(WordCountTests, LowerCaseLana){
 	string test = "LAna DeL REy";
 	to_lowercase(test);
-	EXPECT_STREQ("lana del rey", test.c_str());
+	EXPECT_EQ(test, "lana dek rey");
 
 
 
@@ -104,22 +104,29 @@ TEST(WordCountTests, CountWords) {
   EXPECT_EQ(counts.at("aa"), 2);
   EXPECT_EQ(counts.at("bc"), 1);
   EXPECT_EQ(counts.at("foo"), 1);
-  EXPECT_EQ(counts.at("bar"), 1);
+  EXPECT_EQ(counts.at("bar"), 2);
   EXPECT_FALSE(counts.contains("baz"));
 }
 
 TEST (WordCountTests, CountWordsMulti) {
 
-stringstream test("air lana bob lana lana time");
+	stringstream test("air lana bob lana lana time");
 
-const auto counts = count_words(test, {});
-EXPECT_EQ(counts.at("lana"),3) ;
-EXPECT_EQ(counts.at("time"),1);
-EXPECT_EQ(counts.at("air"),1) ;
-EXPECT_EQ(counts.at("bob"), 1);
+	const auto counts = count_words(test, {});
+	EXPECT_EQ(counts.at("lana"),3) ;
+	EXPECT_EQ(counts.at("time"),1);
+	EXPECT_EQ(counts.at("air"),1) ;
+	EXPECT_EQ(counts.at("bob"), 1);
 
-EXPECT_FALSE(counts.contains("del"));
+	EXPECT_FALSE(counts.contains("del"));
 
 }
 
+TEST(WordCountTests, EmptyOutput) {
+    map<string, int> counts;
+    stringstream output;
 
+    output_word_counts(counts, output);
+
+    EXPECT_EQ(output.str(), "");
+}
